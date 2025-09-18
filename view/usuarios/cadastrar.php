@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
 
 
+
 $id = !empty($_GET['id']) ? $_GET['id'] : 0;
 ?>
 
@@ -241,8 +242,18 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                     bootbox.confirm({
                         size: "small",
                         message: "Deseja remover esse registro?",
+                        buttons: {
+                            confirm: {
+                                label: '<i class="bi bi-check-circle me-1"></i>Sim',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: '<i class="bi bi-x-circle me-1"></i>Não',
+                                className: 'btn-danger'
+                            }
+                        },
                         callback: function (result){
-                            bootbox.alert({size: 'small', message: result});
+                            //bootbox.alert({size: 'small', message: result});
                         }
                     });
                 });
