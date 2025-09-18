@@ -226,6 +226,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                 $("#formcadastrarusuario").submit(function (e){                    
                     e.preventDefault();
                     
+                    $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
                     let form = $(this);
                     $.post(form.attr('action'), form.serialize(), function(retorno){
                        let resultado = retorno.indexOf("success") != -1;
@@ -237,8 +238,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                 });   
                 
                 $('#btnExc').on('click', function(e){
-                    //e.preventDefault();                                        
-                    
+                    //e.preventDefault();                                                            
                     bootbox.confirm({
                         size: "small",
                         message: "Deseja remover esse registro?",
@@ -253,6 +253,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                             }
                         },
                         callback: function (result){
+                             $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
                             //bootbox.alert({size: 'small', message: result});
                         }
                     });
