@@ -227,8 +227,8 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                     e.preventDefault();
                     
                     $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
-                    let form = $(this);
-                    $.post(form.attr('action'), form.serialize(), function(retorno){
+                    let form = $(this);                    
+                    $.post(form.attr('action'), form.serialize(), function(retorno){                       
                        let resultado = retorno.indexOf("success") != -1;
                        retornoToast(retorno, getDateHour());
                        if(resultado > 0){
@@ -253,9 +253,19 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                             }
                         },
                         callback: function (result){
-                             $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
-                            //bootbox.alert({size: 'small', message: result});
-                        }
+                            if(result){ //se result for verdadeiro(sim)
+                                $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
+                                    let form = $("#formcadastrarusuario");
+                                    $.post('/html/sistema/validacao/usuarios/excluir.php', form.serialize(), function(retorno){
+                                        let resultado = retorno.indexOf("success") != -1;
+                                        retornoToast(retorno, getDateHour());
+                                        if(resultado > 0){
+                                            window.location.href = "/html/sistema/view/usuarios/listar.php";
+                                        }
+                                    });
+                                }
+                            }
+                            
                     });
                 });
                 

@@ -54,6 +54,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
                 </table>
             </div>            
         </div>
+        <script nonce="<?= uniqid() ?>">
+            $(document).ready(function () {
+                let tableUsuarios = $('#tabela_listar_usuarios').DataTable();
+            });
+        </script>
         <?php include_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/estrutura/rodape.php'; ?>        
     </body>
 </html>
