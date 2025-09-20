@@ -1,0 +1,13 @@
+{
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
+    },
+    "require": {
+        "ramsey/uuid": "^4.2",
+        "dompdf/dompdf": "^3.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

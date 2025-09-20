@@ -56,7 +56,38 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
         </div>
         <script nonce="<?= uniqid() ?>">
             $(document).ready(function () {
-                let tableUsuarios = $('#tabela_listar_usuarios').DataTable();
+                
+                //INICIO TABELA
+                let tableUsuarios = $('#tabela_listar_usuarios').DataTable({
+                    language: {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        info: "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                        infoEmpty: "Mostrando 0 até 0 de 0 registros",
+                        infoFiltered: "(Filtrados de _MAX_ registros)",
+                        infoPostFix: "",
+                        infoThousands: ".",
+                        decimal: ',',
+                        thousands: '.',
+                        lengthMenu: "_MENU_ resultados por página",
+                        loadingRecords: "Carregando...",
+                        "sProcessing": "Processando...",
+                        zeroRecords: "Nenhum registro encontrado",
+                        "sSearch": "Pesquisar",
+                        "oPaginate": {
+                            "sNext": "<i class='bi bi-caret-right-fill'></i>",
+                            "sPrevious": "<i class='bi bi-caret-left-fill'></i>",
+                            "sFirst": "<i class='bi bi-skip-backward-fill'></i>",
+                            "sLast": "<i class='bi bi-skip-forward-fill'></i>"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Ordenar colunas de forma ascendente",
+                            "sSortDescending": ": Ordenar colunas de forma descendente"
+                        }
+                    }
+                });
+                //FIM TABELA
+                
+                
             });
         </script>
         <?php include_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/estrutura/rodape.php'; ?>        
