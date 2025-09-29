@@ -13,7 +13,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/menu.php"; ?>
         <div class="container shadow bg-white p-3 rounded-3">   
             <div>
+                <!--Adicionar -->
                 <a href="/html/sistema/view/usuarios/cadastrar.php?id=0" class="btn btn-success"><i class="bi bi-person-fill-add me-1"></i>Adicionar</a>
+                <!--Gerar relatório-->
+                <a href="/html/sistema/relatorio/usuarios/listar_usuarios.php" class="btn btn-dark">Relatório</a>
             </div>            
             
             <div class="table-responsive mt-1 bg-white">
