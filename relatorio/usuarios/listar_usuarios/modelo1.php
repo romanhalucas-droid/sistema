@@ -63,10 +63,29 @@ $body .= "
         </thead>
         <tbody>
     ";
-        
+
+//PERCORRER TODOS OS USUÁRIOS
+foreach($usuarios as $u){
+    $body .= "<tr>
+            <td>{$u->getNome()}</td>
+            <td>{$u->getCpf()}</td>
+            <td>{$u->getDatanasc()}</td>
+            <td>{$u->getContato1()}</td>
+            <td>{$u->getEmail()}</td>
+            <td>{$u->getUsuario()}</td>
+            <td>{$u->getSexo()}</td>
+           </tr>
+        ";
+}
+
 $body .= "
         </tbody>
     </table>
     ";
 
 $rodape .= "</body></html>";
+$html = $head . $body . $rodape;
+$dompdf->loadHtml($html); //CARREGANDO O HTML NO DOMPDF
+$dompdf->setPaper('A4', 'portrait'); //TIPO E ORIENTAÇÃO DE PAPEL
+$dompdf->render(); //CRIAR O MEU PDF
+$dompdf->stream('listar_usuarios_modelo1.pdf', ["Attachment" => 0]); //EXIBIR EM TELA O PDF
