@@ -8,7 +8,7 @@ if(!empty($_GET)){//verificando se esta recebendo uma requisição GET
         //incluir a pagina do modelo correspondente
         include $_SERVER['DOCUMENT_ROOT']."/html/sistema/relatorio/usuarios/listar_usuarios/modelo1.php";
     }else{
-        echo "Modelo inválidoo";
+        echo "Modelo inválido";
     }
 }else{
     echo "Requisição inválida.";
