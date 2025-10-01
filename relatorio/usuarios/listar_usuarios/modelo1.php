@@ -32,6 +32,28 @@ $css .= "
     @page {
         margin: 30px 50px 50px 50px;
     }
+    table{
+        width: 100%;
+        border-collapse: collapse; /*REMOVER DUPLICAÇÃO DE BORDA NA TELA*/
+        table-layout: fixed; /*fixar layout da página*/
+        word-wrap: break-word; /*quebrar linha no meio da palavra*/
+    }
+    
+    th, td{
+        padding: 5px;
+        font-size: 12px;
+        word-wrap: break-word; /*quebrar linha no meio da palavra*/
+        overflow-wrap: break-word;
+    }
+    
+    th{
+        background-color: #f2f2f2;
+    }
+    
+    h1{
+        text-align: center;
+    }
+    
     ";
 
 $head .= "
@@ -49,7 +71,7 @@ $head .= "
 // id, nome, cpf, datanasc, contato1, email, usuario, senha, sexo 
 $body .= "
     <h1>Listagem de usuários</h1>
-    <table>
+    <table border='1'>
         <thead>
             <tr>
                 <th>Nome</th>
@@ -69,11 +91,11 @@ foreach($usuarios as $u){
     $body .= "<tr>
             <td>{$u->getNome()}</td>
             <td>{$u->getCpf()}</td>
-            <td>{$u->getDatanasc()}</td>
+            <td>".dtSqlToBrasil($u->getDatanasc())."</td>
             <td>{$u->getContato1()}</td>
             <td>{$u->getEmail()}</td>
             <td>{$u->getUsuario()}</td>
-            <td>{$u->getSexo()}</td>
+            <td>".(($u->getSexo()=='M') ? "Masculino" : "Feminino")."</td>
            </tr>
         ";
 }
@@ -86,6 +108,7 @@ $body .= "
 $rodape .= "</body></html>";
 $html = $head . $body . $rodape;
 $dompdf->loadHtml($html); //CARREGANDO O HTML NO DOMPDF
+$dompdf->set_option('defaultFont', 'Arial'); //GARANTIR QUE A FONTE É ARIAL
 $dompdf->setPaper('A4', 'portrait'); //TIPO E ORIENTAÇÃO DE PAPEL
 $dompdf->render(); //CRIAR O MEU PDF
 $dompdf->stream('listar_usuarios_modelo1.pdf', ["Attachment" => 0]); //EXIBIR EM TELA O PDF
