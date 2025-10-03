@@ -31,6 +31,7 @@ if(isset($_SESSION) && isset($_SESSION['logadoform']) && $_SESSION['logadoform']
                     
                     if($usuario['usuario']==$input['usuario'] && $usuario['senha']==$input['senha']){
                         ?><div class="logado">Usuário logado com sucesso!</div><?php                        
+                        session_regenerate_id();
                         $erro = false;                        
                         $_SESSION['logadoform'] = true;
                         $_SESSION['usuarioform'] = $input['usuario'];

@@ -116,7 +116,7 @@ class UsuariosDAO{
                 return false;
             }            
             
-        } catch (Exception $ex) {
+        } catch (Exception $ex) {            
             echo "ERRO: {$ex->getMessage()}";
             return false;
         }

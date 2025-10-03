@@ -78,14 +78,14 @@ try{
         
         ?><div class="alert alert-success" role="alert">Usuário salvo com sucesso!</div><?php  //MSG DE SUCESSO
     }else{
-        //SE ALGO ESTIVER ERRRADO
-        $conn_db->rollBack(); //DESFAZER AS ALTEREÇÕES FEITAS
+        //SE ALGO ESTIVER ERRRADO        
+        $conn_db->rollBack(); //DESFAZER AS ALTEREÇÕES FEITAS              
         ?><div class="alert alert-danger" role="alert">Algo deu errado ao salvar...</div><?php //MSG DE ERRO
         
     }
     
 } catch (PDOException $epdo) {
-    $conn_db->rollBack();
+    $conn_db->rollBack();    
     ?><div class="alert alert-danger" role="alert">ERRO DB: <?= $epdo->getMessage() ?></div><?php
     
 } catch (Exception $e){
