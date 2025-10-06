@@ -1,88 +1,48 @@
-<?php
-session_start();
-
-if(isset($_SESSION) && isset($_SESSION['logadoform']) && $_SESSION['logadoform']==true){
-    ?><script nonce>location.href = "/html/sistema/view/inicio/";</script><?php
-}
-?>
-
-<!DOCTYPE html>
-
+<!doctype html>
 <html>
     <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="index.css?nocache=<?= uniqid()?>" rel="stylesheet" type="text/css"/>        
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/cabecalho.php"; ?>
+        <title>LOGIN | SISTEMA</title>        
     </head>
-    <body>
-        <div class="container">
-            <?php                                
-                $erro = false;                                
-                
-                if(!empty($_POST)){               
-                    $usuario = array();
-                    $usuario['usuario'] = "admin";
-                    $usuario['senha'] = "inspira";
+    <body>        
+        <div class="container">   
+            <div class="card bg-light mt-1" style="max-width: 30rem">
+                <div class="card-body">
+                    <div class="resultado"></div>
                     
-                    $input = array();
-                    $input['usuario'] = $_POST['usuario'];
-                    $input['senha'] = $_POST['senha'];
-                    
-                    if($usuario['usuario']==$input['usuario'] && $usuario['senha']==$input['senha']){
-                        ?><div class="logado">Usuário logado com sucesso!</div><?php                        
-                        session_regenerate_id();
-                        $erro = false;                        
-                        $_SESSION['logadoform'] = true;
-                        $_SESSION['usuarioform'] = $input['usuario'];
-                        $_SESSION['nomeusuarioform'] = "Lucas Barbosa Romanha";
-                        ?><script nonce>
-                            document.addEventListener("DOMContentLoaded", function(event){
-                                location.href = "/html/sistema/view/inicio/";
-                            });
-                       </script><?php
-                    }else{
-                        ?><div class="erro">Usuário e/ou senha inválidos!</div><?php
-                        $erro = true;
-                    }
-                }                                
-            ?>                       
-            <div id="clogin" class="clogin">
-                <form method="post" action="#">
-                    <label>Usuário:</label><br>
-                    <input 
-                        type="text" 
-                        name="usuario" 
-                        id="usuario" 
-                        <?=($erro==false) ? "autofocus" : "" ?> 
-                        value="<?= ($erro==true) ? $input['usuario'] : ""?>" 
-                        placeholder="Digite o seu usuário..."
-                        required
-                    >                
-                    <br>
-                    <label>Senha:</label><br>
-                    <input 
-                        type="password" 
-                        name="senha" 
-                        id="senha" 
-                        <?= ($erro==true) ? "autofocus" : "" ?>
-                        placeholder="Digite a sua senha..." 
-                        required
-                    >
-                    <br>
-                    <div class="botoes">
-                        <input type="reset" value="Limpar">    
-                        <input type="submit" value="Entrar">    
-                    </div>    
-                </form>
+                    <form id="formlogin" name="formlogin" method="post" action="/html/sistema/validacao/login/login.php">
+                        
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                placeholder="Usuário..." 
+                                class="form-control" 
+                                id="usuario" 
+                                name="usuario"
+                                autocomplete="username"
+                                autofocus
+                                required                                
+                            />
+                            <label for="usuario"><i class="bi bi-person-circle" aria-hidden="true"></i> Digite o usuário...</label>
+                        </div>
+                        
+                        <div class="form-floating mt-1 mb-3">
+                            <input
+                                type="password"
+                                placeholder="Senha..."
+                                class="form-control"
+                                id="senha"
+                                name="senha"
+                                autocomplete="current-password" 
+                                required
+                            />
+                            <label for="senha"><i class="bi bi-shield-lock" aria-hidden="true"></i> Digite a senha...</label>
+                        </div>
+                        
+                    </form>                    
+                </div>
             </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event){
-                if(<?=$_SESSION['logadoform'] ?>){
-                    document.getElementById("clogin").style.display = "none";
-                }
-            });                        
-        </script>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
     </body>
 </html>

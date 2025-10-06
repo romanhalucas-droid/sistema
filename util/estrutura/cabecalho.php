@@ -1,10 +1,12 @@
 <?php
+//UTIL => ESTRUTURA => CABECALHO.PHP
+
 //BLOQUEAR ACESSO DIRETO AO ARQUIVO
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
     header('location:/html/sistema/view/inicio/');
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
+//require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
 ?>
 
 <meta charset="UTF-8">
