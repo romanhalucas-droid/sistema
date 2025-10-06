@@ -39,7 +39,20 @@
                             <label for="senha"><i class="bi bi-shield-lock" aria-hidden="true"></i> Digite a senha...</label>
                         </div>
                         
-                    </form>                    
+                        <div class="row">
+                            <div class="col">
+                                <button 
+                                    type="submit"
+                                    id="btnlogar"
+                                    name="btnlogar"
+                                    class="btn btn-lg w-100 btn-primary"
+                                >
+                                    <i class="bi bi-door-open-fill"></i> Entrar
+                                </button>                                 
+                            </div>
+                        </div>
+                        
+                    </form>         
                 </div>
             </div>
         </div>
