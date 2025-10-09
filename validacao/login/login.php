@@ -12,13 +12,13 @@ if(!isset($_SESSION)){
 //iniciar conexão
 require_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/conexao/inicio_conexao.php";
 
-$sql = $conn_db->prepare("SELECT id, nome, usuario FROM usuarios WHERE usuario=:usuario");
+$sql = $conn_db->prepare("SELECT id, nome, usuario, senha FROM usuarios WHERE usuario=:usuario");
 $sql->bindValue(":usuario", $_POST['usuario']);
 $sql->execute();//apertar enter
 
 if($sql->rowCount() == 1){//SE QUANTIDADE DE REGISTRO RETORNADO FOR IGUAL A 
-    while($linha = $sql->fetch(PDO::FETCH_ASSOC)){
-        //SE PASSWORD DIGITADO PELO USUÁRIO FOR IGUAL AO CRIPTOGRAFADO NO BANCO
+    while($linha = $sql->fetch(PDO::FETCH_ASSOC)){        
+        //SE PASSWORD DIGITADO PELO USUÁRIO FOR IGUAL AO CRIPTOGRAFADO NO BANCO          
         if(password_verify($_POST['senha'], $linha['senha'])){
             session_regenerate_id(); //REINICIAR A O ID DA SESSÃO
             $_SESSION['logadoform'] = true;

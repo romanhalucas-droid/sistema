@@ -5,11 +5,10 @@
         <title>LOGIN | SISTEMA</title>        
     </head>
     <body>        
-        <div class="container">   
-            <div class="card bg-light mt-1" style="max-width: 30rem">
+        <div class="container d-flex justify-content-center align-items-center" style="height: 100vh">   
+            <div class="card bg-light mt-1 w-100" style="max-width: 30rem">
                 <div class="card-body">
-                    <div class="resultado"></div>
-                    
+                    <div class="resultado"></div>                    
                     <form id="formlogin" name="formlogin" method="post" action="/html/sistema/validacao/login/login.php">
                         
                         <div class="form-floating">
@@ -56,6 +55,18 @@
                 </div>
             </div>
         </div>
+        
+        <script nonce="<?= uniqid()?>">
+            $('#formlogin').submit(function (e) {
+                e.preventDefault();
+                $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
+                let form = $('#formlogin');
+                $.post(form.attr('action'), form.serialize(), function(retorno){
+                   $('.resultado').html(retorno);
+                });
+            });
+        </script>        
+        
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
     </body>
 </html>
