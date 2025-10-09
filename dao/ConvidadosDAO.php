@@ -11,7 +11,7 @@ class ConvidadosDAO{
             $obj->setConfirmado($ln['confirmado']);
             $obj->setDtExpiracao($ln['dtExpiracao']);
             $obj->setVistoPorUltimo($ln['vistoPorUltimo']);           
-            $obj->setUsuario(UsuariosDAO::selectIndex(['conn' => $conn, 'id' => $ln['idusuario']])[0]);           
+            $obj->setUsuarios(UsuariosDAO::selectIndex(['conn' => $conn, 'id' => $ln['idusuario']])[0]);           
             
             return $obj;
         } catch (Exception $ex) {
@@ -20,5 +20,63 @@ class ConvidadosDAO{
         }
     }
     
+    ///////////////////////////////////
+    //SELECIONAR POR ID
+    ///////////////////////////////////
+    public static function selectIndex($array){
+        try{ 
+            //$conn = !empty($array['conn']) ? $array['conn'] : throw new Exception('A conexão não foi aberta!');            
+            $conn = self::verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            $id = !empty($array['id']) ? $array['id'] : null;
+            
+            $sql = $conn->prepare("SELECT * FROM convidados obj WHERE obj.id = :id");
+            $sql->bindValue(":id", $id);
+            
+            $sql->execute();
+            
+            $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+            
+            $objs = array();
+            
+            foreach ($resultado as $ln){             
+                $objs[] = self::estruturarSQL($conn, $ln);
+            }
+            
+            return $objs;
+            
+        } catch (Exception $ex) {
+            echo "ERRO: {$ex->getMessage()}";
+            return false;
+        }
+    }
     
+    ////////////////////////
+    //SELECIONAR TODOS
+    ////////////////////////
+    public static function selectAll($array){
+        try{ 
+            $conn = self::verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            
+            $sql = $conn->prepare("SELECT * FROM convidados obj");
+            
+            $sql->execute();
+            
+            $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+            
+            $objs = array();
+            
+            foreach ($resultado as $ln){             
+                $objs[] = self::estruturarSQL($conn, $ln);
+            }
+            
+            return $objs;
+            
+        } catch (Exception $ex) {
+            echo "ERRO: {$ex->getMessage()}";
+            return false;
+        }
+    }
+    
+    
+  ////////////////////fim da classe  
 }

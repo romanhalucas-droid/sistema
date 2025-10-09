@@ -21,15 +21,7 @@ class UsuariosDAO{
             echo "ERRO: {$ex->getMessage()}";
             return false;
         }
-    }
-        
-    private static function verExpection($logica, $valor, $message){
-        if($logica){
-            return $valor;
-        }else{
-            throw new Exception($message);
-        }
-    }
+    }          
     
     public static function selectIndex($array){
         try{ 
