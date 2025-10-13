@@ -90,21 +90,28 @@ class ConvidadosDAO{
              //id nome celular confirmado dtExpiracao vistoPorUltimo
             if($obj->getId()>0){
                 //ATUALIZAR
-                $sql = "UPDATE convidados SET";
+                $sql = "UPDATE convidados SET id=:id, nome=:nome, celular=:celular, confirmado=:confirmado,"
+                        . " dtExpiracao=:dtExpiracao, vistoPorUltimo=:vistoPorUltimo";
                 $sql = $conn->prepare($sql);
                 $sql->bindValue(":id", $obj->getId());
+                $uuid = $obj->getId(); //NOVO
             }else{
                 //CRIAR
-                $sql = "INSERT INTO convidados() "
-                        . "VALUES ()";
+                $sql = "INSERT INTO convidados(id, nome, celular, confirmado, dtExpiracao, vistoPorUltimo) "
+                        . "VALUES (:id, :nome, :celular, :confirmado, :dtExpiracao, :vistoPorUltimo)";
                 $sql = $conn->prepare($sql);
+                $uuid = Uuid::uuid4(); //NOVO: GERAR UUID(CÓDIGO ALEATÓRIO)
+                $sql->bindValue(':id', $uuid->toString());//NOVO
             }
             
             $sql->bindValue(":nome", $obj->getNome());//RELACIONAR OBJETO COM PARAMETROS DO BANCO DE DADOS       
+            $sql->bindValue(":celular", $obj->getCelular());   
+            $sql->bindValue(":confirmado", $obj->getConfirmado());      
+            $sql->bindValue(":dtExpiracao", $obj->getDtExpiracao());    
+            $sql->bindValue(":vistoPorUltimo", $obj->getVistoPorUltimo());      
             
-            if($sql->execute()){
-                $id = empty($obj->getID()) ? $conn->lastInsertId() : $obj->getId();
-                return $id;
+            if($sql->execute()){               
+                return $uuid; //novo
             }else{
                 return false;
             }            
@@ -115,6 +122,48 @@ class ConvidadosDAO{
         }
     }
     
+    ///////////////////////////////
+    //EXCLUIR
+    ///////////////////////////////
+    public static function excluir($array){
+        try{            
+            $conn = self::verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            $obj = self::verExpection(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
+
+            $sql = "DELETE FROM convidados WHERE id=:id"; //MUDANÇA
+            $sql = $conn->prepare($sql);
+            $sql->bindValue(":id", $obj->getId());
+
+            if($sql->execute()){
+                return $obj->getId();
+            }else{
+                return false;
+            }
+        } catch (Exception $ex) {
+            echo "ERRO: {$ex->getMessage()}";
+            return false;
+        }
+    }
+    
+     public static function selectQtd($array){
+       try{
+           $conn = self::verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+           $sql = "SELECT count(*) as qtd FROM convidados";
+           $sql = $conn->prepare($sql);
+           $sql->execute();
+           
+           $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+           
+           foreach ($resultado as $ln){
+               return $ln['qtd'];
+           }           
+           
+           return 0;
+       } catch (Exception $ex) {
+           echo "ERRO: {$ex->getMessage()}";
+           return false;
+       }
+    }
     
   ////////////////////fim da classe  
 }
