@@ -7,7 +7,16 @@ class Convidados{
     private $confirmado;
     private $dtExpiracao;
     private $vistoPorUltimo;
+    private $Usuarios;
     
+    public function getUsuarios() {
+        return $this->Usuarios;
+    }
+
+    public function setUsuarios($Usuarios): void {
+        $this->Usuarios = $Usuarios;
+    }
+
     public function __construct($id) {
         $this->id = $id;
     }
