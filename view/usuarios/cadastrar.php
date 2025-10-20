@@ -1,8 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
 
-
-
 $id = !empty($_GET['id']) ? $_GET['id'] : 0;
 ?>
 
