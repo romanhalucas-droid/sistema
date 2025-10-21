@@ -56,6 +56,72 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                     <label for='id'>Código:</label>
                 </div>
             <?php } ?>
+                
+            <div class="row">
+                <!--nome do convidado -->
+                <div class='col-sm-6'>
+                    
+                    <div class='form-floating mt-1'>
+                        <input type='text' placeholder="Nome do convidado..." maxlength="150" class='form-control' 
+                        id='nome' name='nome' value='<?=htmlspecialchars($nome)?>' autofocus required>
+                        <label for='nome'>Nome do Convidado</label>
+                    </div>
+                
+                </div>
+                <!--celular do convidado -->
+                <div class='col-sm-6'>
+                
+                    <div class='form-floating mt-1'>
+                        <input type='text' placeholder="Celular do convidado..." class='form-control' id='celular' name='celular'
+                        value='<?= htmlspecialchars($celular)?>' required>
+                        <label for='celular'>Celular:</label>                        
+                    </div>
+                    
+                    <script>
+                        $("#celular").mask('(00) 00000-0000');
+                    </script>
+                    
+                </div>
+                
+                <div class='row'>
+                    <!-- data de expiração -->
+                    <div class='col-sm-6'>
+                        
+                        <div class='form-floating mt-1'>
+                            <input type='text' placeholder='Data de expiração...' class='form-control' id='dtExpiracao'
+                                   name='dtExpiracao' value='<?=htmlspecialchars( dtSqlToBrasil($dtExpiracao) )?>' required>
+                            <label for='dtExpiracao'>Data de Expiração</label>
+                        </div>
+                        
+                        <script>
+                            $("#dtExpiracao").mask('00/00/0000', {reverse: false});
+                            
+                            $("#dtExpiracao").datepicker({
+                               language: 'pt-BR',
+                               format: 'dd/mm/yyyy',
+                               startView: 1                            
+                            });
+                        </script>
+                        
+                    </div>
+                    <!-- confirmado -->
+                    <div class='col-sm-6'>
+                        
+                        <div class='form-floating mt-1'>
+                            <select id='confirmado' name='confirmado' class='form-select w-100'>
+                                <option value='1' <?= ($confirmado==1) ?? "selected" ?> >Não respondeu</option>
+                                <option value='2' <?= ($confirmado==2) ?? "selected" ?> >Não vai</option>
+                                <option value='3' <?= ($confirmado==3) ?? "selected" ?> >Confirmado</option>
+                            </select> 
+                            <label for='confirmado'>Confirmado:</label>
+                        </div>
+                                               
+                    </div>
+                </div>
+                
+                
+                
+            </div>
    
         </div>
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
