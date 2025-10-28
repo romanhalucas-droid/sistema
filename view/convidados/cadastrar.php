@@ -119,11 +119,33 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                     </div>
                 </div>
                 
+                <!-- BOTÕES -->
+                <div class="row mt-2">
+                    <!-- BOTAO DE FECHAR -->
+                    <div class="col">
+                        <a id="btnfechar" name="btnfechar" href="/html/sistema/view/convidados/listar.php" class="btn w-100 btn-warning">
+                            <i class="bi bi-arrow-left-circle"></i> Voltar
+                        </a>
+                    </div>
+                    <!-- BOTAO DE EXCLUIR -->
+                    <div class="col">
+                        <a id="btnExc" name="btnExc" class="btn w-100 btn-danger">
+                            <i class='bi bi-backspace-fill'></i> Excluir
+                        </a>
+                    </div>
+                    <!-- BOTAO DE SALVAR -->
+                    <div class="col">
+                        <button type='submit' id='btnsalvar' name='btnsalvar' class='btn w-100 btn-primary'>
+                            <i class='bi bi-check2-square'></i> Salvar
+                        </button>
+                    </div>
+                </div>
                 
                 
             </div>
    
         </div>
+        <script src="cadastrar.js" type="text/javascript"></script>
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
     </body>
 </html>
