@@ -36,7 +36,29 @@ $(document).ready(function (){
         e.preventDefault();
         //CAIXA DE CONFIRMAÇÃO DE EXCLUSÃO
         bootbox.confirm({
-            
+           size: "small",
+           message: "Deseja remover esse registro?",
+           buttons:{
+               confirm: {
+                   label: "<i class='bi bi-check-circle me-1'></i>Sim",
+                   className: 'btn-success'
+               },
+               cancel: {
+                   label: "<i class='bi bi-x-circle me-1'></i>Não",
+                   className: 'btn-danger'
+               }
+           },
+           callback: function(result){
+               //SE HOUVER RESULTADO, EXECUTAR OPERAÇÃO
+               if(result){                                      
+                   $(document).ajaxStart(loading()).ajaxStop($.unblockUI); //BLOQUEAR TELA ENQUANTO OCORRE A EXCLUSÃO
+                   let form = $("#formcadastrarconvidados");                   
+                   $.post('/html/sistema/validacao/convidados/excluir.php', form.serialize(), function(retorno){
+                       let resultado = retorno.indexOf('success') != 1;
+                        retornoToast(retorno, getDateHour());
+                   });
+               }
+           }
         });
     });
     
