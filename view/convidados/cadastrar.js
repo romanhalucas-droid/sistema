@@ -54,8 +54,12 @@ $(document).ready(function (){
                    $(document).ajaxStart(loading()).ajaxStop($.unblockUI); //BLOQUEAR TELA ENQUANTO OCORRE A EXCLUSÃO
                    let form = $("#formcadastrarconvidados");                   
                    $.post('/html/sistema/validacao/convidados/excluir.php', form.serialize(), function(retorno){
-                       let resultado = retorno.indexOf('success') != 1;
+                        let resultado = retorno.indexOf('success') != 1;
                         retornoToast(retorno, getDateHour());
+                        
+                        if(resultado > 0){ //VERIFICAR SE RESULTADO FOI POSITIVO
+                            window.location.href = "/html/sistema/view/convidados/listar.php";
+                        }                        
                    });
                }
            }

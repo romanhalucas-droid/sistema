@@ -47,6 +47,11 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
         <div class="container bg-white shadow p-3 rounded-3">      
             <h3>Cadastro de Convidados</h3>
             
+            <form 
+                name="formcadastrarconvidados" id="formcadastrarconvidados" method="post" 
+                action="/html/sistema/validacao/convidados/salvar.php"
+            >                
+                  
             <?php
             if($id==0){
                 ?><input class='form-control' type='hidden' id='id' name='id' value='<?=htmlspecialchars($id)?>' required readonly>
@@ -82,7 +87,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                     </script>
                     
                 </div>
-                
+            </div>
                 <div class='row'>
                     <!-- data de expiração -->
                     <div class='col-sm-6'>
@@ -143,7 +148,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                 
                 
             </div>
-   
+            </form>
         </div>
         <script src="cadastrar.js" type="text/javascript"></script>
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
