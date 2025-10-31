@@ -3,12 +3,12 @@ $(document).ready(function (){
     //////////////////////////
     //SALVAR
     //////////////////////////
-    $('formcadastrarconvidados').submit(function(e){
+    $('#formcadastrarconvidados').submit(function(e){
         //garante que o formulário não vai ser enviado ao clicar em salvar
         e.preventDefault();
         
         //bloqueio temporário da tela (evitar duplo clique)
-        $(document).ajaxStart(loading().ajaxStop($.unblockUI));
+        $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
         
         //carregar informações do formulário
         let form = $(this);

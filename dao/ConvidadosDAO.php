@@ -91,7 +91,7 @@ class ConvidadosDAO{
             if($obj->getId()>0){
                 //ATUALIZAR
                 $sql = "UPDATE convidados SET id=:id, nome=:nome, celular=:celular, confirmado=:confirmado,"
-                        . " dtExpiracao=:dtExpiracao, vistoPorUltimo=:vistoPorUltimo";
+                        . " dtExpiracao=:dtExpiracao, vistoPorUltimo=:vistoPorUltimo WHERE id=:id";
                 $sql = $conn->prepare($sql);
                 $sql->bindValue(":id", $obj->getId());
                 $uuid = $obj->getId(); //NOVO

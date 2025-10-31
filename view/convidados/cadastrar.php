@@ -150,7 +150,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
             </div>
             </form>
         </div>
-        <script src="cadastrar.js" type="text/javascript"></script>
+        <script src="cadastrar.js?v=<?= uniqid()?>" type="text/javascript"></script>
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
     </body>
 </html>
