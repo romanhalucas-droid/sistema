@@ -24,7 +24,7 @@ try{
     $conn_db->beginTransaction();//inicia a transação
     
     //se o ID for diferente de 0 quer dizer que é uma atualização de registro existente
-    if($id <> 0){
+    if(!empty($id)){
         //busca registro no banco para editar
         $obj = ConvidadosDAO::selectIndex(['conn' => $conn_db, 'id' => $id])[0];
     }else{

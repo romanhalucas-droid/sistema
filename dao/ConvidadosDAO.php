@@ -88,7 +88,7 @@ class ConvidadosDAO{
             $obj = verExpection(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
             
              //id nome celular confirmado dtExpiracao vistoPorUltimo
-            if($obj->getId()!==0){
+            if(!empty($obj->getId())){
                 //ATUALIZAR
                 $sql = "UPDATE convidados SET id=:id, nome=:nome, celular=:celular, confirmado=:confirmado, idusuario=:idusuario,"
                         . " dtExpiracao=:dtExpiracao, vistoPorUltimo=:vistoPorUltimo WHERE id=:id";
