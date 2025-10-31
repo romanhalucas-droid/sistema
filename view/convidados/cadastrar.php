@@ -22,7 +22,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
         //abrir conexão com banco de dados
         require_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/conexao/inicio_conexao.php";
         
-        if($id==0){
+        if($id===0){
             //REGISTRO NOVO
             $id = 0;
             $nome = "";
@@ -53,7 +53,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
             >                
                   
             <?php
-            if($id==0){
+            if($id===0){
                 ?><input class='form-control' type='hidden' id='id' name='id' value='<?=htmlspecialchars($id)?>' required readonly>
             <?php }else{ 
                 ?><div class='form-floating'>

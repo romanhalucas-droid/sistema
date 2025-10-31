@@ -88,17 +88,17 @@ class ConvidadosDAO{
             $obj = verExpection(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
             
              //id nome celular confirmado dtExpiracao vistoPorUltimo
-            if($obj->getId()>0){
+            if($obj->getId()!==0){
                 //ATUALIZAR
-                $sql = "UPDATE convidados SET id=:id, nome=:nome, celular=:celular, confirmado=:confirmado,"
+                $sql = "UPDATE convidados SET id=:id, nome=:nome, celular=:celular, confirmado=:confirmado, idusuario=:idusuario,"
                         . " dtExpiracao=:dtExpiracao, vistoPorUltimo=:vistoPorUltimo WHERE id=:id";
                 $sql = $conn->prepare($sql);
                 $sql->bindValue(":id", $obj->getId());
                 $uuid = $obj->getId(); //NOVO
             }else{
                 //CRIAR
-                $sql = "INSERT INTO convidados(id, nome, celular, confirmado, dtExpiracao, vistoPorUltimo) "
-                        . "VALUES (:id, :nome, :celular, :confirmado, :dtExpiracao, :vistoPorUltimo)";
+                $sql = "INSERT INTO convidados(id, nome, celular, confirmado, dtExpiracao, vistoPorUltimo, idusuario) "
+                        . "VALUES (:id, :nome, :celular, :confirmado, :dtExpiracao, :vistoPorUltimo, :idusuario)";
                 $sql = $conn->prepare($sql);
                 $uuid = Uuid::uuid4(); //NOVO: GERAR UUID(CÓDIGO ALEATÓRIO)
                 $sql->bindValue(':id', $uuid->toString());//NOVO
@@ -109,6 +109,7 @@ class ConvidadosDAO{
             $sql->bindValue(":confirmado", $obj->getConfirmado());      
             $sql->bindValue(":dtExpiracao", $obj->getDtExpiracao());    
             $sql->bindValue(":vistoPorUltimo", $obj->getVistoPorUltimo());      
+            $sql->bindValue(":idusuario", $obj->getUsuarios()->getId());      
             
             if($sql->execute()){               
                 return $uuid; //novo
