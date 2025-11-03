@@ -28,7 +28,7 @@ class ConvidadosDAO{
     public static function selectIndex($array){
         try{ 
             //$conn = !empty($array['conn']) ? $array['conn'] : throw new Exception('A conexão não foi aberta!');            
-            $conn = verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            $conn = verException(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
             $id = !empty($array['id']) ? $array['id'] : null;
             
             $sql = $conn->prepare("SELECT * FROM convidados obj WHERE obj.id = :id");
@@ -57,7 +57,7 @@ class ConvidadosDAO{
     ////////////////////////
     public static function selectAll($array){
         try{ 
-            $conn = verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            $conn = verException(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
             
             $sql = $conn->prepare("SELECT * FROM convidados obj");
             
@@ -84,8 +84,8 @@ class ConvidadosDAO{
     ////////////////////////////////////////////////
     public static function save($array){
         try{            
-            $conn = verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
-            $obj = verExpection(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
+            $conn = verException(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            $obj = verException(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
             
              //id nome celular confirmado dtExpiracao vistoPorUltimo
             if(!empty($obj->getId())){
@@ -128,8 +128,8 @@ class ConvidadosDAO{
     ///////////////////////////////
     public static function excluir($array){
         try{            
-            $conn = self::verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
-            $obj = self::verExpection(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
+            $conn = verException(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+            $obj = verException(!empty($array['obj']), $array['obj'], 'O objeto não existe!');
 
             $sql = "DELETE FROM convidados WHERE id=:id"; //MUDANÇA
             $sql = $conn->prepare($sql);
@@ -148,7 +148,7 @@ class ConvidadosDAO{
     
      public static function selectQtd($array){
        try{
-           $conn = self::verExpection(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
+           $conn = verException(!empty($array['conn']), $array['conn'], 'A conexão não foi aberta!');
            $sql = "SELECT count(*) as qtd FROM convidados";
            $sql = $conn->prepare($sql);
            $sql->execute();

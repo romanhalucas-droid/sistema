@@ -22,7 +22,7 @@ function deixarNumero($string) {
     return !empty($string) ? preg_replace("/[^0-9]/", "", $string) : NULL;
 }
 
-function verExpection($logica, $valor, $message){
+function verException($logica, $valor, $message){
     if($logica){
         return $valor;
     }else{
