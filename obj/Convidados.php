@@ -89,6 +89,86 @@ class Convidados{
         $this->vistoPorUltimo = $vistoPorUltimo;
     }
 
-
+    public function validar() {
+        //CARREGAR VARIÁVEIS A SEREM VALIDADAS
+        $nome = $this->nome;
+        $celular = $this->celular;
+        $confirmado = $this->confirmado;
+        $dtExpiracao = $this->dtExpiracao;
+        
+        ////////////////////////////////
+        //NOME
+        ///////////////////////////////
+        if(empty($nome)){//verificar  se está vazio
+            return [
+                'result' => false,
+                'msg' => "Não é permitido o campo NOME ficar VAZIO"
+            ];
+        }
+        
+        if(!empty($nome) AND (substr($nome, 0, 1) == " " OR substr($nome, -1) === " ")){
+            //SE NOME FOR DIFERENTE DE VAZIO E O PRIMEIROU OU ÚLTIMO CARACTERE FOR ESPAÇO
+            return [
+                'result' => false,
+                'msg' => "Não é permitido espaço como primeiro e/ou último caractere do NOME!"
+            ];
+        }
+        
+        //////////////////////////////////////////////////
+        //CELULAR
+        //////////////////////////////////////////////////
+        if(empty($celular)){//verificar  se está vazio
+            return [
+                'result' => false,
+                'msg' => "Não é permitido o campo CELULAR ficar VAZIO"
+            ];
+        }
+        
+        if(!empty($celular) AND strlen($celular)<10){//se celular for diferente de vazio e o tamanho da string for menor que 10
+            return [
+                'result' => false,
+                'msg' => "Número informado no campo CELULAR inválido."
+            ];
+        }
+        
+        ////////////////////////////////////////////////////
+        //CONFIRMADO
+        ////////////////////////////////////////////////////
+        if($confirmado<1 OR $confirmado>3){//se confirmado for menor que 1 OR confirmado maior que 3
+            return [
+                'result' => false,
+                'msg' => "Opção selecionada no campo CONFIRMADO inválida."
+            ];
+        }    
+        
+        ////////////////////////////////////////////////////
+        //DATA EXPIRAÇÃO
+        ////////////////////////////////////////////////////
+        if(empty($dtExpiracao)){//verificar  se está vazio
+            return [
+                'result' => false,
+                'msg' => "Não é permitido o campo DATA DE EXPIRAÇÃO ficar VAZIO"
+            ];
+        }
+        
+        if(!empty($dtExpiracao) AND (substr($dtExpiracao, 0, 1) == " " OR substr($dtExpiracao, -1) === " ")){
+            //SE data de expiração FOR DIFERENTE DE VAZIO E O PRIMEIROU OU ÚLTIMO CARACTERE FOR ESPAÇO
+            return [
+                'result' => false,
+                'msg' => "Não é permitido espaço como primeiro e/ou último caractere da DATA DE EXPIRAÇÃO!"
+            ];
+        }
+        
+        if(strlen($dtExpiracao)!==10){
+            //SE QUANTIDADE DE DÍGITOS FOR DIFERENTE DE 10
+            return [
+                'result' => false,
+                'msg' => "O campo DATA DE EXPIRAÇÃO deve ter obrigatóriamente 10 dígitos."
+            ];
+        }
+        
+        //caso esteja certo
+        return ['result' => true, 'msg'=> "Validado com sucesso!"];
+    }
 
 }

@@ -40,6 +40,12 @@ try{
     $obj->setDtExpiracao(dtBrasilToSql($dtExpiracao)); //converter formato de data BR para SQL(banco de dados)
     $obj->setUsuarios(new Usuarios($_SESSION['idusuarioform']));
     
+    //VALIDAÇÃO
+    $validar = $obj->validar();
+    if(!$validar['result']){
+        throw new Exception($validar['msg']);
+    }
+    
     //A função de save salva o objeto no banco de dados (novo ou editado)
     if($return = ConvidadosDAO::save(['conn' => $conn_db, 'obj' => $obj])){
         $conn_db->commit(); //confirmar (salvar) alterações no banco de dados
