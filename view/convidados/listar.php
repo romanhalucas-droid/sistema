@@ -53,13 +53,22 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
                                 <td><?=dtSqlToBrasil( $c->getDtExpiracao() )?></td>
                                 <td><?=$c->getUsuarios()->getNome()?></td>
                                 <td><?=$c->getVistoPorUltimo()?></td>
-                                <td>
+                                <td style="white-space: nowrap;">
                                     <!-- BOTAO EDITAR -->
-                                    <a class="link-success link-offset-2" 
+                                    <a class="link-success link-offset-2 me-1" 
                                        style="font-size: 22px" 
                                        href="/html/sistema/view/convidados/cadastrar.php?id=<?=$c->getId()?>"
                                     >
                                         <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    
+                                    <!-- LINK PARA O CONVITE -->
+                                    <a class="link-info link-offset-2 me-1"
+                                       style="font-size: 22px"
+                                       target="_blank"
+                                       href="/html/sistema/view/convite/?id=<?=$c->getId()?>"
+                                    >
+                                        Link
                                     </a>
                                     
                                     

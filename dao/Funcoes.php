@@ -29,3 +29,21 @@ function verException($logica, $valor, $message){
         throw new Exception($message);
     }
 }
+
+function getDatetimeNow(){
+    $dtz = new DateTimeZone("America/Sao_Paulo"); //pegar fuso
+    $dt = new DateTime("now", $dtz); //pegar data e hora atual de acordo com o fuso
+    return $dt->format("Y-m-d H:i:s");
+}
+
+function saudacao(){
+    date_default_timezone_set('America/Sao_Paulo');
+    $hora = date('H');
+    if($hora >= 5 AND $hora < 12){
+        return 'Bom dia';
+    }else if($hora>=12 AND $hora<18){
+        return 'Boa tarde';
+    }else{
+        return 'Boa noite';
+    }
+}
