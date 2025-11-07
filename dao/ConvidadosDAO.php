@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT']."/html/sistema/obj/Convidados.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/html/sistema/dao/UsuariosDAO.php";
 
 use Ramsey\Uuid\Uuid;
 

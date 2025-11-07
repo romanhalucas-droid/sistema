@@ -10,6 +10,7 @@ if (!empty($id)){
         
         $convidado = ConvidadosDAO::selectIndex(['conn' => $conn_db, 'id' => $id])[0];
         $conn_db->setAttribute(PDO::ATTR_AUTOCOMMIT, false); //desativando save automático
+        $conn_db->beginTransaction(); //iniciar conexão manualmente
         
         $convidado->setVistoPorUltimo(getDatetimeNow());
         
@@ -42,6 +43,13 @@ if (!empty($id)){
     </head>
     <body class="bg-light">
         <div class="container">
+            
+            <!--CONTEÚDO-->
+            <div class="card mt-4 mx-auto bg-white border-0 shadow-sm" style="max-width: 600px;">
+                <div class="card-body text-center">
+                
+                </div>
+            </div>
             
         </div>
     </body>
