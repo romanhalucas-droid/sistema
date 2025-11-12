@@ -120,17 +120,87 @@ if (!empty($id)){
                                         Infelizmente não poderei comparecer.
                                     </a>
                                 </div>    
-                                
-                            <?php endif ?>
-                                
-                                
-                        <?php endif ?>
+                                <?php endif ?>
+                                <!-- CASO USUÁRIO NÃO RESPONDEU E PASSOU DO PRAZO -->
+                            <?php else: ?>
+                                <p class="card-text">
+                                    Infelizmente não recebemos sua confirmação a tempo, e por isso tivemos
+                                    que encerrar a lista de convidados. Esperamos que compreenda e saiba que estará em nossos corações
+                                    nesse momento especial.
+                                </p>                                
+                            <?php endif ?>                        
+                            <p class='mt-4' style='font-style: italic'>
+                                Com carinho,<br>
+                                <strong>Turma Desenvolvimento de Sistemas</strong>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            <?php else: ?>
-                <center><h4>Convidado não encontrado!</h4></center>
-            <?php endif ?>
+                <?php else: ?>
+                    <center><h4>Convidado não encontrado!</h4></center>
+                <?php endif ?>
         </div>
+        
+        <script nonce='<?= uniqid()?>'>
+            document.addEventListener('DOMContentLoaded', function(){
+                
+                ///AÇÃO PARA QUANDO CLICAR NO BOTÃO: SIM, ESTAREI PRESENTE!
+                $(".btn-success").on("click", function (e){
+                    e.preventDefault();//impede o link de ser seguido imediatamente
+                    
+                    bootbox.confirm({
+                        title: "Confirmação de Presença",
+                        message: "Você confirma que estará presente na confraternização?",
+                        buttons:{
+                            confirm: {
+                                label: "Sim",
+                                className: "btn-success"
+                            },
+                            cancel:{
+                                label: "Não",
+                                className: "btn-danger"
+                            }
+                        },
+                        callback: function(result){
+                            if(result){
+                                //se o usuário confirmar, redirecionar para URL de confirmação
+                                window.location.href = e.target.href;
+                            }
+                        }
+                    });
+                    
+                });
+                
+                ///AÇÃO PARA QUANDO CLICAR NO BOTÃO: NÃO
+                $(".btn-danger").on("click", function (e){
+                    e.preventDefault();//impede o link de ser seguido imediatamente
+                    
+                    bootbox.confirm({
+                        title: "Confirmação de Presença",
+                        message: "Você confirma que NÃO estará presente na confraternização?",
+                        buttons:{
+                            confirm: {
+                                label: "Sim",
+                                className: "btn-success"
+                            },
+                            cancel:{
+                                label: "Não",
+                                className: "btn-danger"
+                            }
+                        },
+                        callback: function(result){
+                            if(result){
+                                //se o usuário confirmar, redirecionar para URL de confirmação
+                                window.location.href = e.target.href;
+                            }
+                        }
+                    });
+                    
+                });
+                
+                
+            });
+        </script>
+        
         <?php $_SERVER['DOCUMENT_ROOT']."/html/sistema/util/estrutura/rodape.php" ?>
     </body>
 </html>
