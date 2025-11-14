@@ -41,6 +41,32 @@
                             . "ou deseje alterar sua resposta, por favor, entre em contato conosco.");
                 }
                 
+                //carregar informação no objeto
+                $obj->setId($id);
+                $obj->setConfirmado($confirmado);
+                
+                //atualizar convidado
+                if(ConvidadosDAO::save(['conn' => $conn_db, 'obj' => $obj])){
+                    $conn_db->commit(); //confirmar as alterações (save point)
+                    
+                    if($confirmado==3){//ele vai
+                        ?><div class="alert alert-success text-center" role="alert">
+                            Presença confirmada!
+                            <br>
+                            Mal podemos esperar para te ver lá!
+                        </div><?php
+                    }else{//ele não vi
+                        ?><div class="alert alert-warning text-center" role="alert">
+                            Poxa! Que pena que você não podera ir :'(
+                            <br>
+                            Mas obrigado por avisar. <3
+                        </div><?php
+                    }
+                    
+                }else{
+                    $conn_db->rollBack();
+                    ?><div class="alert alert-danger" role="alert">Algo deu errado ao salvar...</div><?php
+                }
                 
                 
             } catch (PDOException $e) {
@@ -49,9 +75,13 @@
             } catch (Exception $e) {
                 $conn_db->rollBack();
                 ?><div class="alert alert-danger" role="alert"><?=$e->getMessage()?></div><?php
+            } finally {
+                $conn_db->setAttribute(PDO::ATTR_AUTOCOMMIT, true);
+                require_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/conexao/fim_conexao.php";
             }
             ?>
         </div>
+        <?php require_once $_SERVER["DOCUMENT_ROOT"].'/html/sistema/util/estrutura/rodape.php'; ?>
     </body>
 </html>
         
