@@ -114,9 +114,9 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                         
                         <div class='form-floating mt-1'>
                             <select id='confirmado' name='confirmado' class='form-select w-100'>
-                                <option value='1' <?= ($confirmado==1) ?? "selected" ?> >Não respondeu</option>
-                                <option value='2' <?= ($confirmado==2) ?? "selected" ?> >Não vai</option>
-                                <option value='3' <?= ($confirmado==3) ?? "selected" ?> >Confirmado</option>
+                                <option value='1' <?= ($confirmado==1) ? "selected" : "" ?> >Não respondeu</option>
+                                <option value='2' <?= ($confirmado==2) ? "selected" : "" ?> >Não vai</option>
+                                <option value='3' <?= ($confirmado==3) ? "selected" : "" ?> >Confirmado</option>
                             </select> 
                             <label for='confirmado'>Confirmado:</label>
                         </div>
